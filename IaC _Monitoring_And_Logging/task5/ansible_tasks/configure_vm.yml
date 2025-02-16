@@ -1,0 +1,5 @@
+- name: Configure Azure VM with Nginx
+  hosts: VM
+  become: yes
+  roles:
+    - nginx_setup

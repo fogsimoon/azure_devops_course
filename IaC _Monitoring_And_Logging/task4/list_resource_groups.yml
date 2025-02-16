@@ -1,0 +1,13 @@
+- name: Retrieve Azure Resource Groups
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: List all Azure Resource Groups
+      azure.azcollection.azure_rm_resourcegroup_info:
+      register: resource_groups
+
+    - name: Print Resource Groups (Compact View)
+      debug:
+        msg: "{{ resource_groups.resourcegroups | map(attribute='name') | list }}"

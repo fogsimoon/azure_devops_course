@@ -1,0 +1,7 @@
+all:
+  hosts:
+    VM:
+      ansible_host: 52.176.176.196
+      ansible_user: azureuser
+      ansible_ssh_private_key_file: ~/.ssh/ansible_azure
+      ansible_python_interpreter: /usr/bin/python3
