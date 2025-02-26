@@ -292,3 +292,101 @@ b. Ensure that any failed tests block the deployment process.
 
 ![Task](test_plans_ci_cd/manual.png)
 
+**Practical Task 11: Full CI/CD Pipeline with Infrastructure as Code, Testing, and Artifact**
+
+**Requirements:**
+
+1. Design the Application Architecture:
+a. Create a simple application that consists of multiple components (e.g., a frontend application, a backend API, and a database).
+2. Create a Bicep File for Infrastructure:
+a. Create a Bicep file (main.bicep) that provisions all necessary resources for the application, including:
+   - i. An Azure App Service for the frontend.
+   - ii. An Azure Function or Azure App Service for the backend API.
+   - iii. An Azure SQL Database or Cosmos DB for data storage.
+b. Ensure that the Bicep file includes networking components, such as a Virtual Network and Subnets if needed.
+3. Create Terraform Configuration:
+   - a. Create a Terraform configuration (main.tf) that defines the same infrastructure as the Bicep file.
+   - b. Ensure that the Terraform configuration can be used to provision the infrastructure independently.
+4. Set Up Azure Artifacts:
+   - a. Create an Azure Artifacts feed to store the application’s packages (e.g., npm packages for the frontend and NuGet packages for the backend).
+   - b. Modify the build pipelines to publish the application’s packages to the Azure Artifacts feed.
+5. Create CI/CD Pipelines:
+   - a. Create two separate pipelines: one for the frontend and one for the backend.
+6. Frontend Pipeline:
+   - a. The pipeline should:
+     - i. Trigger on changes to the frontend code in the repository.
+     - ii. Build the frontend application and run unit tests.
+     - iii. Publish the build artifacts to Azure Artifacts.
+     - iv. Deploy the frontend application to the Azure App Service using the Bicep file
+7. Backend Pipeline:
+   - a. The pipeline should:
+     - i. Trigger on changes to the backend code in the repository.
+     - ii. Build the backend API and run unit tests.
+     - iii. Publish the backend API package to Azure Artifacts.iv. Deploy the backend API to Azure using the Bicep file.
+8. Integrate Azure Test Plans:
+   - a. Create a comprehensive test plan in Azure Test Plans that includes both manual and automated tests for both the frontend and backend.
+   - b. Update both pipelines to include a testing stage that runs automated tests and publishes the results to Azure Test Plans.
+9. Implement Continuous Monitoring:
+   - a. Set up Application Insights for both the frontend and backend applications to monitor performance and errors.
+   - b. Configure alerts for critical issues that may arise in the production environment.
+10. Run the Full CI/CD Process:
+   - a. Trigger both pipelines by making changes to the codebase.
+   - b. Verify that the entire CI/CD process runs smoothly, from code commit to deployment.
+   - c. Check the Azure portal to ensure all resources are provisioned correctly and that the applications are running as expected.
+
+[backapp.bicep](ci_cd/backapp.bicep)
+
+[frontapp.bicep](ci_cd/frontapp.bicep)
+
+[sqldb.bicep](ci_cd/sqldb.bicep)
+
+[main.bicep](ci_cd/main.bicep)
+
+![Task](ci_cd/createres.png)
+
+[main.tf](ci_cd/main.tf)
+
+[variables.tf](ci_cd/variables.tf)
+
+[azure-pipelines.yml](ci_cd/azure-pipelines.yml)
+
+![Task](ci_cd/frontend.png)
+
+![Task](ci_cd/backend.png)
+
+![Task](ci_cd/entraid.png)
+
+![Task](ci_cd/serviceconnector.png)
+
+![Task](ci_cd/sql.png)
+
+![Task](ci_cd/frontenv.png)
+
+![Task](ci_cd/backenv.png)
+
+![Task](ci_cd/backfeed.png)
+
+![Task](ci_cd/frontfeed.png)
+
+![Task](ci_cd/testcases.png)
+
+![Task](ci_cd/backtests.png)
+
+![Task](ci_cd/fronttests.png)
+
+![Task](ci_cd/appins.png)
+
+![Task](ci_cd/actgr.png)
+
+![Task](ci_cd/alertrule.png)
+
+![Task](ci_cd/backinsights.png)
+
+![Task](ci_cd/backrls.png)
+
+![Task](ci_cd/frontrls.png)
+
+![Task](ci_cd/personlist.png)
+
+![Task](ci_cd/persondetail.png)
+

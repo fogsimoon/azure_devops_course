@@ -1,0 +1,79 @@
+trigger:
+- main
+
+pool:
+  name: Default
+  demands:
+    - agent.name -equals LinuxAgent
+
+stages:
+- stage: Build
+  displayName: Build Node.js Solution
+  jobs:
+  - job: Build
+    steps:
+
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '23.x'
+      displayName: 'Install Node.js'
+
+    - task: npmAuthenticate@0
+      inputs:
+        workingFile: '.npmrc'   
+      displayName: "Authenticate with Azure Artifacts feed"
+
+    - script: npm config get registry
+      displayName: 'Check npm registry'
+
+    - script: |
+        npm install
+      displayName: 'Restore Dependencies'
+
+    - script: |
+        npm run build
+      displayName: 'Build Application'
+
+    - script: npm test -- --coverage
+      displayName: 'Run Automated Tests'
+
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/TEST-*.xml'
+        mergeTestResults: true
+      displayName: 'Publish Test Results'
+
+    - script: |
+        ls -laR ./test-results
+      displayName: 'List Test Results Files'
+
+    # - script: |
+    #     npm publish
+    #   displayName: 'Publish Package to Azure Artifacts feed'
+
+    - script: |
+        sudo apt update
+        sudo apt install -y zip
+      displayName: 'Install zip'
+
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.SourcesDirectory)/dist'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/drop/app.zip'
+        replaceExistingArchive: true
+      displayName: 'Archive Build Output'
+
+    - script: |
+        echo "Listing files in $(Build.ArtifactStagingDirectory):"
+        ls -laR $(Build.ArtifactStagingDirectory)
+      displayName: 'List Artifact Files'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: '$(Build.ArtifactStagingDirectory)/drop'
+        artifactName: 'drop'
+        publishLocation: 'Container'
+      displayName: 'Publish Build Artifacts'
