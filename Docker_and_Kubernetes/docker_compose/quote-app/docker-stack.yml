@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  backend:
+    image: quote-app-backend
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 1
+        delay: 5s
+    ports:
+      - "3000:3000"
+    volumes:
+      - backend-logs:/app/logs
+    networks:
+      - quote-network
+
+  frontend:
+    image: quote-app-frontend
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8080:8080"
+    networks:
+      - quote-network
+
+networks:
+  quote-network:
+
+volumes:
+  backend-logs:
+    driver: local

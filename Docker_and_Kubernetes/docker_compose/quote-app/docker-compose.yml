@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  backend:
+    image: backend/multistage
+    container_name: quote-backend
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    volumes:
+      - backend-logs:/app/logs  
+
+  frontend:
+    image: frontend/multistage
+    container_name: quote-frontend
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      - REACT_APP_API_URL=${REACT_APP_API_URL}
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+
+volumes:
+  backend-logs: 

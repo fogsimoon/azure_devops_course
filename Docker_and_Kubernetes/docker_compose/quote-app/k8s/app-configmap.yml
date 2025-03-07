@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-configmap
+  namespace: quote-app
+data:
+  BACKEND_URL: "http://10.101.22.148:3000"
