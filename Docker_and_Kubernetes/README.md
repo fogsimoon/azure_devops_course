@@ -224,3 +224,58 @@ Verification:
 
 ![Task](hpa/watch_scaling.png)
 
+**Practical Task 5: Implement Ingress for External Access**
+
+**Requirements:**
+
+- Set up an Ingress Controller in your Kubernetes cluster.
+- Create Ingress resources to manage external access to the frontend and backend services.
+- Configure path-based routing to direct traffic to the appropriate service based on the URL path.
+- Verify that the application is accessible via a single external IP or domain name.
+- Note: Use the frontend and backend services from the Docker tasks (Practical Task 3).
+
+![Task](ingress/ingress_manifest.png)
+
+![Task](ingress/frontend.png)
+
+![Task](ingress/backend_api.png)
+
+**Practical Task 6: Deploy a Kubernetes Application with Helm**
+
+**Requirements:**
+
+- Install Helm, the Kubernetes package manager, in your local environment.
+- Create a Helm chart for the multi-container application, including templates for Deployments, Services, and Ingress.
+- Package and deploy the application using Helm.
+- Update the application by modifying the Helm chart and redeploying, demonstrating Helm's upgrade capabilities.
+- Note: Use the multi-container application from the Docker tasks (Practical Task 3) to create the Helm chart.
+
+![Task](helm/helm_install.png)
+
+![Task](helm/helm_list.png)
+
+![Task](helm/namespace.png)
+
+![Task](helm/configmap.png)
+
+![Task](helm/backend.png)
+
+![Task](helm/frontend.png)
+
+![Task](helm/hpa.png)
+
+![Task](helm/ingress.png)
+
+![Task](helm/pv.png)
+
+![Task](helm/deployment_v1.png)
+
+![Task](helm/app_v1.png)
+
+![Task](helm/update_backend.png)
+
+![Task](helm/helm_upgrade.png)
+
+![Task](helm/deployment_v2.png)
+
+![Task](helm/app_v2.png)
